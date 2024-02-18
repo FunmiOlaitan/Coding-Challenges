@@ -24,3 +24,22 @@ def game_loop():
         return rolled_symbols
 
     # Implement win/lose conditions
+    outcome = "Rolled symbols: " + ','.join(rolled_symbols)
+    if rolled_symbols.count("skull") == 3:
+        outcome += "Three skulls! You lose all your money."
+        initial_player_credit = 0
+    elif rolled_symbols.count("skull") == 2:
+        outcome += "Two skulls! You lose £1."
+        initial_player_credit -= 1
+    elif len(set(rolled_symbols)) == 1:
+        if "Bell" in rolled_symbols:
+            outcome += "Three Bells! You win £5."
+            initial_player_credit += 5
+        else:
+            outcome += f"Three {rolled_symbols[0]}s! You win £1."
+            initial_player_credit += 1
+    elif len(set(rolled_symbols)) == 2:
+        outcome += "Two of same symbols! You win 0.50p."
+        initial_player_credit += 0.5
+    else:
+        outcome += "No win this time."
