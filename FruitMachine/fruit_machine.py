@@ -43,3 +43,8 @@ def game_loop():
         initial_player_credit += 0.5
     else:
         outcome += "No win this time."
+    
+    print(outcome)
+
+if __name__ == "__main__":
+    game_loop()
