@@ -21,7 +21,7 @@ Thief! is a simple command-line program designed to help a thief find the correc
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/thief.git
+   git clone https://github.com/FunmiOlaitan/Coding-Challenges.git
    ```
 
 2. Navigate to the project directory:
