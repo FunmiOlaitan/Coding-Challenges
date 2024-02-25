@@ -1,6 +1,6 @@
 # Coding Challenge 
 
-This repository presents a series of coding challenges aimed at improving programming skills. Each challenge offers a distinct problem statement alongside a solution initially developed for command line interfaces (CLI). Over time, solutions are evolved by incorporating graphical user interfaces (GUI) for enhanced user interaction. Furthermore, the adoption of Object-Oriented Programming (OOP) methodologies is used, given suitability for addressing various problems through a class-based approach.
+This repository presents a series of coding challenges aimed at improving programming skills. Any solution within these challenges can be developed using Command Line Interfaces (CLI), Graphical User Interfaces (GUI), and or Object-Oriented Programming (OOP) methodologies. Projects have the flexibility to evolve, adapting and incorporating different approaches as needed. As projects progress, they may transition from one form of implementation to another, allowing for a comprehensive exploration of different development paradigms.
 
 ## Directory Structure
 
