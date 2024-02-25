@@ -78,7 +78,6 @@ Unique Combinations:
 - The program ensures that each combination is unique.
 - The generated combinations can be used by the thief to attempt access to the targeted account.
 
-## License
+## Contact
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+If you have any questions or suggestions regarding the coding challenges, feel free to contact me at [FunmilolaOlaitan@yahoo.com].
