@@ -1,6 +1,7 @@
 import csv
 import random 
 import datetime
+import re
 
 class TestDataGenerator:
     def __init__(self, num_rows, field_names, csv_file):
@@ -22,16 +23,16 @@ class TestDataGenerator:
         
     def random_time_before(self):
         hour = 3
-        minute = random.randit(0, 29)
-        second = random.randit(0, 59)
+        minute = random.randint(0, 29)
+        second = random.randint(0, 59)
         time = datetime.time(hour,minute,second)
         return time.strftime("%H:%M:%S")
     
     def random_time_after(self):
         hour = 3
-        minute = random.randit(30, 59)
-        second = random.randit(0, 59)
-        time = datetime.time(minute,hour,second)
+        minute = random.randint(30, 59)
+        second = random.randint(0, 59)
+        time = datetime.time(hour,minute,second)
         return time.strftime("%H:%M:%S")
 
     def generate_data(self):
@@ -43,13 +44,36 @@ class TestDataGenerator:
                 writer.writerow({
                     'Car': self.random_car_type(),
                     'Plate': self.random_number_plate(),
-                    'TimeFirstCamera': self.random_time_before(),
-                    'TimeSecondCamera': self.random_time_after()
+                    'camera1_time': self.random_time_before(),
+                    'camera2_time': self.random_time_after()
                 })
         print(f"Data has been generated and saved to {self.csv_file}.")    
 
 class ValidNumberPlate:
-    pass
+    def __init__(self, csv_file):
+        self.csv_file = csv_file
+    
+    def validate_number_plate(self, plate):
+        pattern = re.compile(r'^[A-Z]{2}\d{2}\s\d{3}$')
+        return bool(pattern.match(plate))
+    
+    def update_csv(self):
+        rows = []
+        with open(self.csv_file, mode='r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                plate = row['Plate']
+                is_valid = self.validate_number_plate(plate)
+                row['Valid'] = 'Yes' if is_valid else 'No'
+                rows.append(row)
+          
+        # Write updated rows back to CSV
+        with open(self.csv_file, mode='w', newline='') as file:
+            fieldnames = reader.fieldnames + ['Valid']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"Validation completed. Updated CSV: {self.csv_file}")
 
 class Speeding:
     pass
