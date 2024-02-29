@@ -1,5 +1,6 @@
 import csv
 import random 
+import datetime
 
 class TestDataGenerator:
     def __init__(self, num_rows, field_names, csv_file):
@@ -18,6 +19,20 @@ class TestDataGenerator:
             return f"{letters}{numbers} {numbers_after}"
         else:
             return ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ', k=7))
+        
+    def random_time_before(self):
+        hour = 3
+        minute = random.randit(0, 29)
+        second = random.randit(0, 59)
+        time = datetime.time(hour,minute,second)
+        return time.strftime("%H:%M:%S")
+    
+    def random_time_after(self):
+        hour = 3
+        minute = random.randit(30, 59)
+        second = random.randit(0, 59)
+        time = datetime.time(minute,hour,second)
+        return time.strftime("%H:%M:%S")
 
     def generate_data(self):
         with open(self.csv_file, mode='w', newline= '') as file:
@@ -27,10 +42,11 @@ class TestDataGenerator:
                 # Generate random data for each row
                 writer.writerow({
                     'Car': self.random_car_type(),
-                    'Plate': self.random_number_plate()
+                    'Plate': self.random_number_plate(),
+                    'TimeFirstCamera': self.random_time_before(),
+                    'TimeSecondCamera': self.random_time_after()
                 })
-
-        
+        print(f"Data has been generated and saved to {self.csv_file}.")    
 
 class ValidNumberPlate:
     pass
