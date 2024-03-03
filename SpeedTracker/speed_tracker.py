@@ -1,6 +1,6 @@
 import csv
 import random 
-import datetime
+from datetime import datetime
 import re
 
 class TestDataGenerator:
@@ -37,7 +37,7 @@ class TestDataGenerator:
 
     def generate_data(self):
         with open(self.csv_file, mode='w', newline= '') as file:
-            writer = csv.DictWriter(file, feildnames=self.field_names)
+            writer = csv.DictWriter(file, fieldnames=self.field_names)
             writer.writeheader()
             for _ in range(self.num_rows):
                 # Generate random data for each row
@@ -76,4 +76,21 @@ class ValidNumberPlate:
         print(f"Validation completed. Updated CSV: {self.csv_file}")
 
 class Speeding:
-    pass
+    def __init__(self, csv_file):
+        self.csv_file = csv_file
+
+    def calculate_speed_and_violators(self, speed_limit, distance_miles):
+        violators = []
+        with open(self.csv_file, mode= 'r') as file:
+            reader =csv.DictReader(file)
+            for row in reader:
+                plate = row['Plate']
+                camera1_time = datetime.strptime(row['camera1_time'], "%H:%M:%S")
+                camera2_time = datetime.strptime(row['camera2_time'], "%H:%M:%S")
+                time_difference = camera2_time - camera1_time
+                time_difference_hours = time_difference.total_seconds()/3600
+                average_speed_mph = distance_miles/ time_difference_hours
+                if average_speed_mph > speed_limit:
+                    violators.append((plate, average_speed_mph))
+        return violators 
+
