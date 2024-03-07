@@ -20,22 +20,15 @@ class TestDataGenerator:
             return f"{letters}{numbers} {numbers_after}"
         else:
             return ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ', k=7))
-        
-    def random_time_before(self):
-        hour = 3
+   
+    def random_time(self, start_hour, end_hour):
+        hour = random.randint(start_hour, end_hour)
         minute = random.randint(0, 29)
         second = random.randint(0, 59)
         time = datetime.time(hour,minute,second)
         return time.strftime("%H:%M:%S")
     
-    def random_time_after(self):
-        hour = 3
-        minute = random.randint(30, 59)
-        second = random.randint(0, 59)
-        time = datetime.time(hour,minute,second)
-        return time.strftime("%H:%M:%S")
-
-    def generate_data(self):
+    def generate_data(self, start_hour, end_hour):
         with open(self.csv_file, mode='w', newline= '') as file:
             writer = csv.DictWriter(file, fieldnames=self.field_names)
             writer.writeheader()
@@ -44,8 +37,8 @@ class TestDataGenerator:
                 writer.writerow({
                     'Car': self.random_car_type(),
                     'Plate': self.random_number_plate(),
-                    'camera1_time': self.random_time_before(),
-                    'camera2_time': self.random_time_after()
+                    'camera1_time':  self.random_time(start_hour, end_hour),
+                    'camera2_time':  self.random_time(start_hour, end_hour)
                 })
         print(f"Data has been generated and saved to {self.csv_file}.")    
 
@@ -93,4 +86,3 @@ class Speeding:
                 if average_speed_mph > speed_limit:
                     violators.append((plate, average_speed_mph))
         return violators 
-
