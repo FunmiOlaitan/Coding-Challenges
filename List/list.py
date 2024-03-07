@@ -24,4 +24,20 @@ class ListManager:
         return sorted(list_of_lists)
 
 if __name__ == "__main__":
-    pass
+    manager = ListManager()
+
+    # Generate a list of random integers
+    generated_list = manager.generated_list(1, 20, 10)
+    print('Generated List:', generated_list)
+
+    # Insert an element into the generated list
+    modified_list = manager.inserting_element(3, 2)
+    print('Modified List:', modified_list)
+
+    # Extract list of lists from the modified list
+    list_of_lists = manager.extract_list_of_list(modified_list, 3, 3)
+    print("List of Lists:", list_of_lists)
+
+    # Sort the list of lists
+    sorted_list_of_lists = manager.sort_list_of_list(list_of_lists)
+    print("sorted List of List:", sorted_list_of_lists)
