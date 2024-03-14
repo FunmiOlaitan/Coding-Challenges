@@ -1,42 +1,26 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import ttk
 
+class UnitConverterApp:
+    def _init__(self, root):
+        self.root = root
+        self.root.title("Unit Converter")
+        self.root.geometry("300x100")
 
-class LengthCalculator:
-    def __init__(self):
-        # Initialise units in length 
-        self.m_conversions = {
-            "km": 0.001,
-            "cm": 100
-        }
-        self.km_conversions = {
-            "cm": 100000,
-            "m": 1000
-        }
-        self.cm_conversions = {
-            "m": 0.01,
-            "km": 0.00001
-        }
-    def meter_conversion(self):
+        # Variables to store user selections
+        self.category_var = tk.StringVar()
+
+        # Frame for screen 1
+        self.screen1_frame = ttk.Frame(root)
+        self.screen1_frame.pack()
+
+        ttk.Label(self.screen1_frame, text="Select Category:").pack()
+        self.category_dropdown = ttk.Combobox(self.screen1_frame, textvariable=self.category_var, values=["Length", "Temperature", "Volume", "Area"])
+        self.category_dropdown.pack()
+        ttk.Button(self.screen1_frame, text="Next").pack()
+        
+        # Frame for screen 2
+        self.screen2_frame = ttk.Frame(root)
+
+    def show_screen2(self):
         pass
-
-    def centimeter_conversion(self):
-        pass
-    def kilometer_conversion(self):
-        pass
-
-class TemperatureCalculator:
-    pass
-
-class VolumeCalculator:
-    pass
-
-class AreaCalculator:
-    pass
-
-# Create tkinter window 
-root = tk.Tk()
-root.title("Unit_converter")
-
-label = tk.Label(root, text="Welcome to Unit Converter")
-
