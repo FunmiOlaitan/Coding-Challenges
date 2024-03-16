@@ -2,12 +2,13 @@ import csv
 import random 
 from datetime import datetime, time
 import re
+import os
 
 class TestDataGenerator:
-    def __init__(self, num_rows, field_names, csv_file):
+    def __init__(self, num_rows, field_names, folder_name):
         self.num_rows = num_rows
         self.field_names = field_names
-        self.csv_file = csv_file
+        self.folder_name = folder_name
     
     def random_car_type(self):
         return random.choice(['BMW','Toyota','Honda','Ford','Audi','Volkswagen','Hyundai','Nissan', 'Mercedes-Benz'])
@@ -28,7 +29,10 @@ class TestDataGenerator:
         return time(hour, minute, second)
     
     def generate_data(self, start_hour, end_hour):
-        with open(self.csv_file, mode='w', newline='') as file:
+        # Construct the full path for the CSV file
+        csv_file_path = os.path.join(self.folder_name, 'data.csv')
+
+        with open(csv_file_path, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=self.field_names)
             writer.writeheader()
             for _ in range(self.num_rows):
@@ -39,11 +43,11 @@ class TestDataGenerator:
                     'camera1_time':  self.random_time(start_hour, end_hour).strftime("%H:%M:%S"),
                     'camera2_time':  self.random_time(start_hour, end_hour).strftime("%H:%M:%S")
                 })
-        print(f"Data has been generated and saved to {self.csv_file}.")
+        print(f"Data has been generated and saved to {csv_file_path}.")
 
 class ValidNumberPlate:
-    def __init__(self, csv_file):
-        self.csv_file = csv_file
+    def __init__(self, csv_file_path):
+        self.csv_file_path = csv_file_path
     
     def validate_number_plate(self, plate):
         pattern = re.compile(r'^[A-Z]{2}\d{2}\s\d{3}$')
@@ -51,8 +55,7 @@ class ValidNumberPlate:
     
     def update_csv(self):
         rows = []
-        fieldnames = None
-        with open(self.csv_file, mode='r') as file:
+        with open(self.csv_file_path, mode='r') as file:
             reader = csv.DictReader(file)
             fieldnames = reader.fieldnames + ['Valid']
             for row in reader:
@@ -62,19 +65,19 @@ class ValidNumberPlate:
                 rows.append(row)
           
         # Write updated rows back to CSV
-        with open(self.csv_file, mode='w', newline='') as file:
+        with open(self.csv_file_path, mode='w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(rows)
-        print(f"Validation completed. Updated CSV: {self.csv_file}")
+        print(f"Validation completed. Updated CSV: {self.csv_file_path}")
 
 class Speeding:
-    def __init__(self, csv_file):
-        self.csv_file = csv_file
+    def __init__(self, csv_file_path):
+        self.csv_file_path = csv_file_path
 
     def calculate_speed_and_violators(self, speed_limit, distance_miles):
         violators = []
-        with open(self.csv_file, mode='r') as file:
+        with open(self.csv_file_path, mode='r') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 plate = row['Plate']
@@ -90,24 +93,26 @@ class Speeding:
 def main():
     # Test the data generator
     field_names = ['Car', 'Plate', 'camera1_time', 'camera2_time']
+    folder_name = 'SpeedTracker'
     num_rows = 100
-    csv_file = 'test_data.csv'
-    data_generator = TestDataGenerator(num_rows, field_names, csv_file)
+    data_generator = TestDataGenerator(num_rows, field_names, folder_name)
     data_generator.generate_data(8, 20)
 
+    # Construct the full path for the CSV file
+    csv_file_path = os.path.join(folder_name, 'data.csv')
+
     # Validate number plates
-    validator = ValidNumberPlate(csv_file)
+    validator = ValidNumberPlate(csv_file_path)
     validator.update_csv()
 
     # Check for speeding violations
-    speed_checker = Speeding(csv_file)
+    speed_checker = Speeding(csv_file_path)
     speed_limit = 60  # in mph
     distance_miles = 50  # distance between cameras in miles
     violators = speed_checker.calculate_speed_and_violators(speed_limit, distance_miles)
     print("Speeding Violators:")
     for violator in violators:
         print(f"Plate: {violator[0]}, Average Speed: {violator[1]} mph")
-
 
 if __name__ == "__main__":
     main()
