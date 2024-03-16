@@ -86,3 +86,28 @@ class Speeding:
                 if average_speed_mph > speed_limit:
                     violators.append((plate, average_speed_mph))
         return violators 
+
+def main():
+    # Test the data generator
+    field_names = ['Car', 'Plate', 'camera1_time', 'camera2_time']
+    num_rows = 100
+    csv_file = 'test_data.csv'
+    data_generator = TestDataGenerator(num_rows, field_names, csv_file)
+    data_generator.generate_data(8, 20)
+
+    # Validate number plates
+    validator = ValidNumberPlate(csv_file)
+    validator.update_csv()
+
+    # Check for speeding violations
+    speed_checker = Speeding(csv_file)
+    speed_limit = 60  # in mph
+    distance_miles = 50  # distance between cameras in miles
+    violators = speed_checker.calculate_speed_and_violators(speed_limit, distance_miles)
+    print("Speeding Violators:")
+    for violator in violators:
+        print(f"Plate: {violator[0]}, Average Speed: {violator[1]} mph")
+
+
+if __name__ == "__main__":
+    main()
