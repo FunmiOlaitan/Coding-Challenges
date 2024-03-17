@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-
+from tkinter import messagebox
+import string
+import random
 class HackProof():
     def __init__(self, root):
         self.root = root
@@ -9,17 +11,31 @@ class HackProof():
 
         self.label = ttk.Label(root, text="Create Username and Password")
         self.label.grid(row=0, column=0, columnspan=6)
-
+        
+        # username
         self.username_label = ttk.Label(root, text="Username:")
-        self.username_label.grid(row=2, column=0, sticky='w')
-        self.username_entry = tk.Entry(root)
-        self.username_entry.grid(row=2, column=1)
-
+        self.username_label.grid(row=1, column=0, sticky='w')
+        self.username_entry = ttk.Entry(root)
+        self.username_entry.grid(row=1, column=1)
+        
+        # password 
         self.password_label = ttk.Label(root, text="Password:")
-        self.password_label.grid(row=3, column=0, sticky='w')
+        self.password_label.grid(row=2, column=0, sticky='w')
         self.password_entry = ttk.Entry(root)
-        self.password_entry.grid(row=3, column=1)
+        self.password_entry.grid(row=2, column=1)
+        
+        # create random passowrd button
+        self.generate_button = ttk.Button(root, text="Generate Password", command=self.generate_password)
+        self.generate_button.grid(row=3, column=0, columnspan=2, pady=10)
 
+    def generate_password(self):
+        # define character set for password
+        characters = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
+        password =  ''.join(random.choice(characters) for _ in range(8))
+        response = messagebox.askyesno("Random Password", f"Do you want to use the generated password?\nPassword: {password}")
+        if response:
+            self.password_entry.delete(0, tk.END)
+            self.password_entry.insert(0, password)
 
 root = tk.Tk()
 
