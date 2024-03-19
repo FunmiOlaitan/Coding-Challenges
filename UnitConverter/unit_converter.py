@@ -9,6 +9,8 @@ class UnitConverterApp:
 
         # Variables to store user selections
         self.category_var = tk.StringVar()
+        self.unit_from_var = tk.StringVar()
+        self.unit_to_var = tk.StringVar()
 
         # Frame for screen 1
         self.screen1_frame = ttk.Frame(root)
@@ -27,11 +29,28 @@ class UnitConverterApp:
         # Hide screen 1 and show screen 2
         self.screen1_frame.pack_forget()
         self.screen2_frame.pack()
-        pass
+        
+        # Create widgets for screen 2 based on selected category
+        category = self.category_var.get()
 
-# Create the root window
+        if category == "Length":
+            units = ["Meter (m)", "Kilometer (km)", "Centimeter (cm)"]
+        elif category == "Temperature":
+            units = ["Celsius (°C)", "Fahrenheit (°F)", "Kelvin (K)"]
+        elif category == "Volume":
+            units = ["Liter (L)", "Milliliter (mL)", "Cubic Meter (m³)"]
+        elif category == "Area":
+            units = ["Square Meter (m²)", "Square Kilometer (km²)", "Square Centimeter (cm²)"]
+        
+        # Labels and dropdowns for selecting units
+        ttk.Label(self.screen2_frame, text="Convert from:").pack()
+        self.unit_from_dropdown = ttk.Combobox(self.screen2_frame, textvariable=self.unit_from_var, values=units)
+        self.unit_from_dropdown.pack()
+        ttk.Label(self.screen2_frame, text="Convert to:").pack()
+        self.unit_to_dropdown = ttk.Combobox(self.screen2_frame, textvariable=self.unit_to_var, values=units)
+        self.unit_to_dropdown.pack()
+
 root = tk.Tk()
-# Create an instance of UnitConverter
 converter = UnitConverterApp(root)
 # Start the Tkinter event loop
 root.mainloop()
