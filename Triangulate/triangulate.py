@@ -1,3 +1,4 @@
+import math
 class Triangulate:
     def __init__(self):
         self.first_side = None
@@ -5,12 +6,12 @@ class Triangulate:
         self.third_side = None
     
     def get_dimensions(self):
-        print("Please enter the length for all three sides of a triangle:")
+        print("Please enter the length for all three sides of your triangle")
         while True:
             try:
-                self.first_side = float(input("Please enter the length of the first side if the triangle: "))
-                self.second_side = float(input("Please enter the length of the second side of the triangle: "))
-                self.third_side = float(input("Please enter the length of the third side of the triangle: "))
+                self.first_side = float(input("Length of the first side: "))
+                self.second_side = float(input("Length of the second side: "))
+                self.third_side = float(input("Length of the third side: "))
                 if self.first_side <= 0 or self.second_side <= 0 or self.third_side <=0:
                     print("Length must be positive numbers. Please try again.")
                 else:
@@ -47,5 +48,37 @@ class Triangulate:
         else:
             return None
 
-    def calculate_missing_side(self, angle):
-        pass
+    def calculate_missing_side(self, angle, side_one, side_two):
+        # Convert angle from degrees to radians
+        angle_in_radians = math.radians(angle)
+
+        # Use the sine rule to calculate the missing side length
+        missing_length = math.sin(angle_in_radians) * (side_two / math.sin(math.pi - angle_in_radians))
+
+        print(f"The length of the missing side is: {missing_length}")
+
+    def main(self):
+        # Get triangle dimensions
+        self.get_dimensions()
+
+        # Check if the triangle is valid
+        is_valid_triangle = self.validate_triangle()
+
+        if is_valid_triangle:
+            print(f"With lengths: {self.first_side}, {self.second_side}, {self.third_side}")
+
+            # Classify the triangle
+            triangle_type = self.classify_triangle()
+            print(triangle_type)
+        # Check if the triangle is not equilateral (since all sides are equal)
+            if triangle_type != "This is a Equilateral triangle":
+                print("To calculate missing side:")
+                angle = float(input("Please enter the angle in degrees: "))
+                side_one = float(input("Please enter the length of the first side: "))
+                side_two = float(input("Please enter the length of the second side: "))
+                self.calculate_missing_side(angle, side_one, side_two)
+        else:
+            print("This is not a valid triangle")
+
+triangle_calculator = Triangulate()
+triangle_calculator.main()
