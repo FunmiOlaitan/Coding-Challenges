@@ -19,7 +19,17 @@ class Triangulate:
                 print("Invalid input. Please enter numerical values")
     
     def validate_triangle(self):
-        pass
+        # Assign side lengths to temporary variables
+        a = self.first_side
+        b = self.second_side
+        c = self.third_side
+        
+        # If all three conditions are met, then the sides can form a valid triangle.
+        if a + b > c and a + c > b and b + c > a:
+            # If all conditions are met, return True (valid triangle)
+            return True 
+        else:
+            return False 
 
     def classify_triangle(self):
         pass
