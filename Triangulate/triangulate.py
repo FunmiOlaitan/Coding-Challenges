@@ -30,9 +30,22 @@ class Triangulate:
             return True 
         else:
             return False 
-
+        
     def classify_triangle(self):
-        pass
+        a = self.first_side
+        b = self.second_side
+        c = self.third_side
+        
+        if a == b and a == c:
+            return "This is a Equilateral triangle"
+        elif a != b and a != c and b != c:
+            return "This is a Scalene triangle"
+        elif a == b or a == c or b == c:
+            return "This is a Isosceles triangle"
+        elif (a**2 + b**2 == c**2) or (a**2 + c**2 == b**2) or (b**2 + c**2 == a**2):
+            return "This is a Right-Angle triangle"
+        else:
+            return None
 
     def calculate_missing_side(self, angle):
         pass
