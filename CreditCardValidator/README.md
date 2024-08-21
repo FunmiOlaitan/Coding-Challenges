@@ -24,26 +24,26 @@ python credit_card_validator.py
 ## Example
 
 ```
-Enter credit card number: 4242424242424242
+Enter credit card number: 4242 4242 4242 4242
 Credit card vendor: Visa
 Valid credit card number.
 ```
 
 ```
-Enter credit card number: 378282246310005
+Enter credit card number: 3782-822463-10005
 Credit card vendor: American Express
 Valid credit card number.
 ```
 
 ```
-Enter credit card number: 1234567890123456
+Enter credit card number: 1234-5678-9012-3456
 Unknown credit card vendor.
 Invalid credit card number length.
 ```
 
 ## Note
 
-- Ensure you input only the digits of the credit card number without any spaces or special characters.
+- The script automatically handles spaces, dashes, or other non-digit characters in the credit card number, so you can input the number in any common format.
 
 ## Contact
 

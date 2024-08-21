@@ -1,13 +1,14 @@
 def validate_luhn_algo(credit_card_number):
+    card_number = ''.join(char for char in credit_card_number if char.isdigit())
     # converts each digit in the string into a int and store in list 
-    digits = [int(num) for num in credit_card_number]
+    digits = [int(num) for num in card_number]
     checksum = 0
 
-    for i in range(len(digits) -2, -1, -2):
-        digits[i] *=2
+    for i in range(len(digits) - 2, -1, -2):
+        digits[i] *= 2
         if digits[i] > 9:
-            digits[i] -=9
-    
+            digits[i] -= 9
+
     checksum = sum(digits) % 10
     return checksum == 0
 
