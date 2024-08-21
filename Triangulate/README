@@ -1,0 +1,64 @@
+# Triangulate
+
+This Python program provides functionality to analyse and classify a triangle based on its side lengths. It also offers the capability to calculate the length of a missing side given certain inputs.
+
+## Features
+
+- **Input Triangle Dimensions:** Collects lengths for all three sides of a triangle from the user.
+- **Validate Triangle:** Checks if the provided side lengths form a valid triangle.
+- **Classify Triangle:** Determines the type of triangle based on its side lengths:
+  - Equilateral
+  - Isosceles
+  - Scalene
+  - Right-Angle (including Isosceles Right-Angle)
+- **Calculate Missing Side:** Computes the length of a missing side using the Law of Cosines if additional inputs (angle and two sides) are provided.
+
+## Usage
+
+1. **Run the Program:**
+   Execute the script using a Python interpreter. The program will prompt you to enter the lengths of the three sides of your triangle.
+
+2. **Input Side Lengths:**
+   Provide positive numerical values for the three sides. If invalid inputs are given, the program will prompt you to re-enter the values.
+
+3. **Validate Triangle:**
+   The program checks if the given side lengths form a valid triangle based on the triangle inequality theorem.
+
+4. **Classify Triangle:**
+   Based on the side lengths, the program will classify the triangle into one of the following types:
+   - Equilateral: All three sides are equal.
+   - Isosceles: Two sides are equal.
+   - Scalene: All sides are different.
+   - Right-Angle: The triangle has a right angle, with a special case for Isosceles Right-Angle triangles.
+
+5. **Calculate Missing Side (Optional):**
+   If the triangle is not equilateral, you can choose to calculate a missing side if you provide an angle and the lengths of two sides. The program uses the Law of Cosines for this calculation.
+
+## Example
+
+```
+Please enter the lengths of the three sides of your triangle:
+Length of side 1: 3
+Length of side 2: 4
+Length of side 3: 5
+With lengths: [3.0, 4.0, 5.0]
+This is a Right-Angle triangle.
+```
+
+If the triangle is not equilateral, you can also perform additional calculations:
+
+```
+Please enter the angle in degrees: 90
+Please enter the length of the first side: 3
+Please enter the length of the second side: 4
+The length of the missing side is: 5.00
+```
+
+## Requirements
+
+- Python 3.x
+- Standard Python libraries (`math`)
+
+## Contribution
+
+Contributions are welcome! Feel free to open an issue or submit a pull request for any improvements.
