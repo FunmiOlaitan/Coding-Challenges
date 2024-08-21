@@ -10,7 +10,7 @@ This project is a simple implementation of a fruit machine game written in Pytho
 4. If you choose to play, the machine will deduct £0.20 from your initial credit.
 5. The machine will roll three symbols.
 6. Depending on the outcome, you may win or lose credits.
-7. The game will continue until you choose not to play or your credit drops below £0.20.
+7. The game will continue until you choose not to play or your credit drops below £0.20. The game will end automatically if you do not have enough credit to continue.
 
 ## Symbols
 
@@ -28,7 +28,7 @@ The fruit machine includes the following symbols:
 - **Two Skulls:** If you roll two skulls, you lose £1.
 - **Three Bells:** If you roll three bells, you win £5.
 - **Three of the Same Symbol (except Skulls and Bells):** If you roll three of the same non-skull, non-bell symbols, you win £1.
-- **Two of the Same Symbol:** If you roll two of the same symbols, you win £0.50.
+- **Two of the Same Symbol:** If you roll two of the same symbols, you win 50p.
 - **No Win:** If you don't meet any of the above conditions, you don't win anything.
 
 ## Exiting the Game
