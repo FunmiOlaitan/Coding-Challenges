@@ -17,6 +17,10 @@ class UnitConverterApp:
         # Frame for screen 1
         self.screen1_frame = ttk.Frame(root)  # A container (frame) that holds all the widgets for the first screen
         self.screen1_frame.pack()
+        # Frame for screen 2 
+        self.screen2_frame = ttk.Frame(root)
+        # Frame for screen 3
+        self.screen3_frame = ttk.Frame(root)
 
         # Label and dropdown for selecting category
         ttk.Label(self.screen1_frame, text="Select Category:").pack() 
@@ -24,9 +28,6 @@ class UnitConverterApp:
         self.category_dropdown.pack()
         ttk.Button(self.screen1_frame, text="Next", command=self.show_screen2).pack()
         
-        # Frame for screen 2 
-        self.screen2_frame = ttk.Frame(root)
-
     def show_screen2(self):
         # Hide screen 1 and show screen 2
         self.screen1_frame.pack_forget()
@@ -56,8 +57,15 @@ class UnitConverterApp:
         ttk.Label(self.screen2_frame, text="Enter value to convert:").pack()
         self.value_entry = ttk.Entry(self.screen2_frame, textvariable=self.value_var)  # Entry widget for input value
         self.value_entry.pack()
+        ttk.Button(self.screen2_frame, text="Convert", command=self.show_screen3).pack(pady=10)
+    
+    def show_screen3(self):
+        # Hide screen 2 and show screen 3
+        self.screen2_frame.pack_forget()
+        self.screen3_frame.pack()
 
-        
+        ttk.Label(self.screen3_frame, text="Conversion Result:").pack()
+       
 root = tk.Tk()
 converter = UnitConverterApp(root)
 # Start the Tkinter event loop
