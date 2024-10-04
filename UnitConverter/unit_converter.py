@@ -3,26 +3,28 @@ from tkinter import ttk
 
 class UnitConverterApp:
     def __init__(self, root):
+        # Main window setup 
         self.root = root
         self.root.title("Unit Converter")
-        self.root.geometry("300x100")
+        self.root.geometry("300x200")
 
         # Variables to store user selections
-        self.category_var = tk.StringVar()
-        self.unit_from_var = tk.StringVar()
+        self.category_var = tk.StringVar() # (eg.Length, Temp)
+        self.unit_from_var = tk.StringVar() # (e.g., Meter to Kilometer) 
         self.unit_to_var = tk.StringVar()
+        self.value_var = tk.StringVar()
 
         # Frame for screen 1
-        self.screen1_frame = ttk.Frame(root)
+        self.screen1_frame = ttk.Frame(root)  # A container (frame) that holds all the widgets for the first screen
         self.screen1_frame.pack()
 
         # Label and dropdown for selecting category
-        ttk.Label(self.screen1_frame, text="Select Category:").pack()
+        ttk.Label(self.screen1_frame, text="Select Category:").pack() 
         self.category_dropdown = ttk.Combobox(self.screen1_frame, textvariable=self.category_var, values=["Length", "Temperature", "Volume", "Area"])
         self.category_dropdown.pack()
         ttk.Button(self.screen1_frame, text="Next", command=self.show_screen2).pack()
         
-        # Frame for screen 2
+        # Frame for screen 2 
         self.screen2_frame = ttk.Frame(root)
 
     def show_screen2(self):
@@ -48,8 +50,14 @@ class UnitConverterApp:
         self.unit_from_dropdown.pack()
         ttk.Label(self.screen2_frame, text="Convert to:").pack()
         self.unit_to_dropdown = ttk.Combobox(self.screen2_frame, textvariable=self.unit_to_var, values=units)
-        self.unit_to_dropdown.pack()
+        self.unit_to_dropdown.pack(pady=(0,20))
 
+        # Entry widget to input value to convert
+        ttk.Label(self.screen2_frame, text="Enter value to convert:").pack()
+        self.value_entry = ttk.Entry(self.screen2_frame, textvariable=self.value_var)  # Entry widget for input value
+        self.value_entry.pack()
+
+        
 root = tk.Tk()
 converter = UnitConverterApp(root)
 # Start the Tkinter event loop
