@@ -57,6 +57,7 @@ class UnitConverterApp:
         ttk.Label(self.screen2_frame, text="Enter value to convert:").pack()
         self.value_entry = ttk.Entry(self.screen2_frame, textvariable=self.value_var)  # Entry widget for input value
         self.value_entry.pack()
+        # Convert button
         ttk.Button(self.screen2_frame, text="Convert", command=self.show_screen3).pack(pady=10)
     
     def show_screen3(self):
@@ -65,6 +66,35 @@ class UnitConverterApp:
         self.screen3_frame.pack()
 
         ttk.Label(self.screen3_frame, text="Conversion Result:").pack()
+
+    def convert_units(self):
+        # Retrieve input values 
+        category = self.category_var.get()
+        unit_from = self.unit_from_var.get()
+        unit_to = self.unit_to_var.get()
+        value = float(self.value_var.get()) # Convert input to float for mathematical operations
+
+        # Conversion logic based on the category
+        if category == "Length":
+            return self.convert_length(unit_from, unit_to, value)
+        elif category == "Temperature":
+            return self.convert_temp(unit_from, unit_to, value)
+        elif category == "Volume":
+            return self.convert_volume(unit_from, unit_to, value)
+        elif category == "Area":
+            return self.convert_area(unit_from, unit_to, value)
+
+    def convert_length(self, unit_from, unit_to, value):
+        pass
+
+    def convert_temp(self, unit_from, unit_to, value):
+        pass
+
+    def convert_volume(self, unit_from, unit_to, value):
+        pass
+
+    def convert_area(self, unit_from, unit_to, value):
+        pass
        
 root = tk.Tk()
 converter = UnitConverterApp(root)
