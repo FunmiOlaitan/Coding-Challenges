@@ -84,8 +84,24 @@ class UnitConverterApp:
         elif category == "Area":
             return self.convert_area(unit_from, unit_to, value)
 
-    def convert_length(self, unit_from, unit_to, value):
+    def convert_area(self, unit_from, unit_to, value):
         pass
+       
+    def convert_length(self, unit_from, unit_to, value):
+        conversion_factors = {
+            "Meter (m)": 1,
+            "Kilometer (km)": 1000,
+            "Centimeter (cm)": 0.01
+        }
+       
+        # Convert to base unit (meters)
+        value_in_meters = value * conversion_factors[unit_from]
+
+        # Convert from base unit to target unit
+        return value_in_meters / conversion_factors[unit_to]
+
+
+
 
     def convert_temp(self, unit_from, unit_to, value):
         pass
@@ -93,9 +109,6 @@ class UnitConverterApp:
     def convert_volume(self, unit_from, unit_to, value):
         pass
 
-    def convert_area(self, unit_from, unit_to, value):
-        pass
-       
 root = tk.Tk()
 converter = UnitConverterApp(root)
 # Start the Tkinter event loop
