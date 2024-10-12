@@ -83,9 +83,6 @@ class UnitConverterApp:
             return self.convert_volume(unit_from, unit_to, value)
         elif category == "Area":
             return self.convert_area(unit_from, unit_to, value)
-
-    def convert_area(self, unit_from, unit_to, value):
-        pass
        
     def convert_length(self, unit_from, unit_to, value):
         conversion_factors = {
@@ -96,13 +93,20 @@ class UnitConverterApp:
        
         # Convert to base unit (meters)
         value_in_meters = value * conversion_factors[unit_from]
-
         # Convert from base unit to target unit
         return value_in_meters / conversion_factors[unit_to]
 
-
-
-
+    def convert_area(self, unit_from, unit_to, value):
+        conversion_factors = {
+            "Square Meter (m²)": 1,
+            "Square Kilometer (km²)": 1e6,
+            "Square Centimeter (cm²)": 0.0001
+        }
+        # Convert to base unit (square meters)
+        value_in_square_meters = value * conversion_factors[unit_from]
+        # Convert from base unit to target unit
+        return value_in_square_meters / conversion_factors[unit_to]
+    
     def convert_temp(self, unit_from, unit_to, value):
         pass
 
