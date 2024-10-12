@@ -111,7 +111,15 @@ class UnitConverterApp:
         pass
 
     def convert_volume(self, unit_from, unit_to, value):
-        pass
+        conversion_factors = {
+            "Liter (L)": 1,
+            "Milliliter (mL)": 0.001,
+            "Cubic Meter (m³)": 1000
+        }
+        # Convert input to liters, then to the target unit
+        value_in_liters = value * conversion_factors[unit_from]
+        converted_value = value_in_liters / conversion_factors[unit_to]
+        return converted_value
 
 root = tk.Tk()
 converter = UnitConverterApp(root)
