@@ -65,7 +65,11 @@ class UnitConverterApp:
         self.screen2_frame.pack_forget()
         self.screen3_frame.pack()
 
-        ttk.Label(self.screen3_frame, text="Conversion Result:").pack()
+        # Perform conversion
+        result = self.convert_units()
+
+        result_label = ttk.Label(self.screen3_frame, text=f"Conversion Result: {result}")
+        result_label.pack()
 
     def convert_units(self):
         # Retrieve input values 
